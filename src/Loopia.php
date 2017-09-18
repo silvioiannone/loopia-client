@@ -202,7 +202,10 @@ class Loopia implements DNSProviderInterface
         foreach ($rawRecords as $rawRecord)
         {
             $record = $rawRecord;
-            $record['value'] = $rawRecord['rdata'];
+            if (isset($rawRecord['rdata']))
+            {
+                $record['value'] = $rawRecord['rdata'];
+            }
             $records[] = $this->loadRecord($record, $domain);
         }
 
