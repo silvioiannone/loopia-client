@@ -2,17 +2,15 @@
 
 namespace SI\API;
 
+use Laminas\XmlRpc\Client;
 use SI\API\Loopia\DNSRecord;
-use Zend\XmlRpc\Client;
 
 /**
  * Loopia API client.
- *
- * @package SI\API
  */
 class Loopia implements DNSProviderInterface
 {
-    const BASE_URL = 'https://api.loopia.se/RPCSERV';
+    protected const BASE_URL = 'https://api.loopia.se/RPCSERV';
 
     /**
      * Username.
@@ -82,7 +80,7 @@ class Loopia implements DNSProviderInterface
      */
     public function addRecord(DNSRecordInterface $record): DNSProviderInterface
     {
-        list(, $subdomain, $domain) = $this->extractDomainParts($record->getDomain());
+        [, $subdomain, $domain] = $this->extractDomainParts($record->getDomain());
 
         $this->call('addZoneRecord', [
             $this->username,
@@ -103,7 +101,7 @@ class Loopia implements DNSProviderInterface
      */
     public function getRecords(string $domain): array
     {
-        list(, $subdomain, $topDomain) = $this->extractDomainParts($domain);
+        [, $subdomain, $topDomain] = $this->extractDomainParts($domain);
 
         $records = $this->call('getZoneRecords', [
             $this->username,
@@ -123,7 +121,7 @@ class Loopia implements DNSProviderInterface
      */
     public function deleteRecord(DNSRecordInterface $record): DNSProviderInterface
     {
-        list(, $subdomain, $domain) = $this->extractDomainParts($record->getDomain());
+        [, $subdomain, $domain] = $this->extractDomainParts($record->getDomain());
 
         $this->call('removeZoneRecord', [
             $this->username,
@@ -144,7 +142,7 @@ class Loopia implements DNSProviderInterface
      */
     public function addSubdomain(string $subdomain): DNSProviderInterface
     {
-        list(, $subdomain, $domain) = $this->extractDomainParts($subdomain);
+        [, $subdomain, $domain] = $this->extractDomainParts($subdomain);
 
         if(in_array($subdomain, $this->getSubdomains($domain)))
         {

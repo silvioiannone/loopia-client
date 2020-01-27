@@ -13,6 +13,6 @@
     },
     "minimum-stability": "dev",
     "require": {
-        "zendframework/zend-xmlrpc": "^2.7.0"
+        "laminas/laminas-xmlrpc": "^2.9.0"
     }
 }
