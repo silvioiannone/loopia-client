@@ -6,70 +6,53 @@ use SI\API\DNSRecordInterface;
 
 /**
  * A Loopia DNS record.
- *
- * @package SI\API\Loopia
  */
 class DNSRecord implements DNSRecordInterface
 {
     /**
      * The domain the record is applied to.
-     *
-     * @var string
      */
-    protected $domain;
+    protected string $domain;
 
     /**
      * Record identifier.
-     *
-     * @var integer
      */
-    protected $id;
+    protected int $id;
 
     /**
      * Time to live.
-     *
-     * @var integer
      */
-    protected $ttl;
+    protected int $ttl;
 
     /**
      * Record type.
-     *
-     * @var string
      */
-    protected $type;
+    protected string $type;
 
     /**
      * Record priority.
-     *
-     * @var integer
      */
-    protected $priority;
+    protected int $priority;
 
     /**
      * Record value.
-     *
-     * @var string
      */
-    protected $value;
+    protected string $value;
 
     /**
      * DNSRecord constructor.
-     *
-     * @param array $record
      */
     public function __construct($record = [])
     {
-        if(!$record) return;
+        if(! $record) {
+            return;
+        }
 
         $this->set($record);
     }
 
     /**
      * Set the record data.
-     *
-     * @param array $record
-     * @return mixed
      */
     public function set(array $record): DNSRecordInterface
     {
@@ -85,10 +68,6 @@ class DNSRecord implements DNSRecordInterface
 
     /**
      * Load an external record.
-     *
-     * @param array $record
-     * @param string $domain
-     * @return DNSRecordInterface
      */
     public function load($record, string $domain): DNSRecordInterface
     {
@@ -104,10 +83,8 @@ class DNSRecord implements DNSRecordInterface
 
     /**
      * Get the record.
-     *
-     * @return mixed
      */
-    public function get()
+    public function get(): array
     {
         $rawRecord = [];
         $rawRecord['ttl'] = $this->ttl;
@@ -115,8 +92,7 @@ class DNSRecord implements DNSRecordInterface
         $rawRecord['priority'] = $this->priority;
         $rawRecord['rdata'] = $this->value;
 
-        if($this->id)
-        {
+        if($this->id) {
             $rawRecord['id'] = $this->id;
         }
 
@@ -125,8 +101,6 @@ class DNSRecord implements DNSRecordInterface
 
     /**
      * Get the domain the record is applied to.
-     *
-     * @return string
      */
     public function getDomain(): string
     {
@@ -135,10 +109,8 @@ class DNSRecord implements DNSRecordInterface
 
     /**
      * Get the domain identifier.
-     *
-     * @return mixed
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }

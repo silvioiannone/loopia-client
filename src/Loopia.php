@@ -14,24 +14,18 @@ class Loopia implements DNSProviderInterface
 
     /**
      * Username.
-     *
-     * @var string
      */
-    protected $username;
+    protected string $username;
 
     /**
      * Password
-     *
-     * @var string
      */
-    protected $password;
+    protected string $password;
 
     /**
      * XML-RPC Client.
-     *
-     * @var Client
      */
-    protected $XMLRPCClient;
+    protected Client $XMLRPCClient;
 
     /**
      * Loopia constructor.
@@ -43,10 +37,6 @@ class Loopia implements DNSProviderInterface
 
     /**
      * Set the credentials needed in order to call some Loopia methods.
-     *
-     * @param string $username
-     * @param string $password
-     * @return DNSProviderInterface
      */
     public function authenticate(string $username, string $password): DNSProviderInterface
     {
@@ -58,9 +48,6 @@ class Loopia implements DNSProviderInterface
 
     /**
      * Add records to the specified domain.
-     *
-     * @param array $records
-     * @return DNSProviderInterface
      */
     public function addRecords(array $records): DNSProviderInterface
     {
@@ -74,9 +61,6 @@ class Loopia implements DNSProviderInterface
 
     /**
      * Add a record to the specified domsin.
-     *
-     * @param DNSRecordInterface $record
-     * @return DNSProviderInterface
      */
     public function addRecord(DNSRecordInterface $record): DNSProviderInterface
     {
@@ -96,7 +80,6 @@ class Loopia implements DNSProviderInterface
     /**
      * Get the records for the specified domain.
      *
-     * @param string $domain
      * @return DNSRecord[]
      */
     public function getRecords(string $domain): array
@@ -115,9 +98,6 @@ class Loopia implements DNSProviderInterface
 
     /**
      * Delete the specified record.
-     *
-     * @param DNSRecordInterface $record
-     * @return DNSProviderInterface
      */
     public function deleteRecord(DNSRecordInterface $record): DNSProviderInterface
     {
@@ -138,7 +118,6 @@ class Loopia implements DNSProviderInterface
      * Add a subdomain.
      *
      * @param string $subdomain 'foo.bar.com'
-     * @return DNSProviderInterface
      */
     public function addSubdomain(string $subdomain): DNSProviderInterface
     {
@@ -161,9 +140,6 @@ class Loopia implements DNSProviderInterface
 
     /**
      * Retrieve the subdomains for the specified domain. Requires authentication.
-     *
-     * @param string $domain
-     * @return array
      */
     public function getSubdomains(string $domain): array
     {
@@ -177,8 +153,6 @@ class Loopia implements DNSProviderInterface
     /**
      * Call a Loopia method.
      *
-     * @param string $method
-     * @param array $parameters
      * @return mixed
      */
     protected function call(string $method, array $parameters = [])
@@ -189,9 +163,7 @@ class Loopia implements DNSProviderInterface
     /**
      * Load the raw DNS records into a DNSRecordInterface compatible object.
      *
-     * @param array $rawRecords
-     * @param string $domain
-     * @return array|DNSRecord[]
+     * @return DNSRecord[]
      */
     protected function loadRecords(array $rawRecords, string $domain): array
     {
@@ -212,10 +184,6 @@ class Loopia implements DNSProviderInterface
 
     /**
      * Load the raw DNS records into a DNSRecordInterface compatible object.
-     *
-     * @param array $record
-     * @param string $domain
-     * @return DNSRecordInterface
      */
     protected function loadRecord(array $record, string $domain): DNSRecordInterface
     {
@@ -225,7 +193,6 @@ class Loopia implements DNSProviderInterface
     /**
      * Extract the top main domain and the subdomain from the selected domain.
      *
-     * @param string $domain
      * @return array An array: [$domain, $subdomain]
      */
     protected function extractDomainParts(string $domain): array
